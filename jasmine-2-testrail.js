@@ -63,7 +63,7 @@ class Reporter extends JasmineConsoleReporter {
   specDone(spec) {
     super.specDone(spec)
 
-    const id = spec.description.split(':')[0]
+    const id = spec.description.split(']')[0].substring(2)
     if (this.verbosity.specs) {
       this.caseids.push(
         parseInt(id, 10),
@@ -99,6 +99,10 @@ class Reporter extends JasmineConsoleReporter {
       }
     }
   }
+  
+    checkAllResults(){
+    require ('fs').appendFileSync('./test_rail_data.json', JSON.stringify(this.results))
+  };
 }
 
 module.exports = Reporter;
